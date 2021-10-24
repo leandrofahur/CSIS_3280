@@ -11,8 +11,12 @@
 
   function display_html_footer() {
     echo <<<HTML_FRAGMENT
+          <form action="main.php" method="post">
+            <input type="text" name="degree" />
+            <button type="submit">Check</button>
+          </form>
         </body>
-      </html>              
+      </html>                     
     HTML_FRAGMENT;
   }
 ?>

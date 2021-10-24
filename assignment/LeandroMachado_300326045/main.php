@@ -4,7 +4,7 @@
   global $degree;
   global $num_of_terms;
   
-  function generate_expression($degree) {  
+  function generate_expression($degree) {      
     $GLOBALS['num_of_terms'] = (2*$degree) + 3;
     $coefficients = array();
     $exponents = array();    
@@ -58,22 +58,37 @@
     $coefficients = array_values($terms)[0];    
     $exponents = array_values($terms)[1];    
 
+    // echo "<p>";
+    // print_r($coefficients);
+    // echo "</p>";    
+    // echo "<p>";
+    // print_r($exponents);    
     print "<h1>";
-    for($i = 0; $i < count($coefficients); $i++) {
-      // ($coefficients[$i] > 0 ? "+" . $coefficients[$i] : $coefficients);
-      if($coefficients[0] > 0) {
-        print $coefficients[$i] . "x<sup>" . ($exponents[$i] == 0 ? "": $exponents[$i]) . "</sup> ";
-      } else {
-        print ($coefficients[$i] > 0 ? "+" . $coefficients[$i] : $coefficients[$i]) . "x<sup>" . ($exponents[$i] == 0 ? "": $exponents[$i]) . "</sup> ";        
-      }  
+    print ($coefficients['0'] . ($exponents['0'] === 0 ? "": "x<sup>" . ($exponents['0'] === 1 ? "" : $exponents['0'])) . "</sup> ");    
+      for($i = 1; $i < count($coefficients); $i++) { 
+        if($exponents[$i] === 0) {
+          print ($coefficients[$i] > 0 ? "+" . $coefficients[$i] : $coefficients[$i]);        
+        } 
+        else if ($exponents[$i] === 1){
+          print ($coefficients[$i] > 0 ? "+" . $coefficients[$i] : $coefficients[$i]) . "x ";        
+        } else {
+          print ($coefficients[$i] > 0 ? "+" . $coefficients[$i] : $coefficients[$i]) . "x<sup>" . $exponents[$i] . "</sup> ";        
+        }
+      }
+    print " =</h1>";
+  }
+
+  function display_expression($degree) {
+    $terms = generate_expression($degree);    
+    while(!meets_requirements($terms, $degree)) { 
+      $terms = generate_expression($degree);
     }
-    print "</h1>";
+    print_expression($terms);
   }
 
   // ----------------------------------------------------------------
 
-  display_html_head('Assignment01');
-  $terms = generate_expression(1);
-  print_expression($terms);
+  display_html_head('Assignment01');    
+  display_expression(($_POST["degree"] === "" ? 0 : (int)$_POST["degree"]));
   display_html_footer();
 ?>
