@@ -153,4 +153,5 @@ echo "The value of the <strong>result</strong> after executing this piece of cod
 // evaluate_foreach_loop(array(8,0,-4,-4,4,4,10,-2), "<", -5, $operator);
 // evaluate_foreach_loop($values, $comparator, $random_integer_to_compare, $operator);
 
+
 ?>
