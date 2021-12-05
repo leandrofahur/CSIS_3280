@@ -2,22 +2,50 @@
 // By Saeed Mirjalili
 require "lib.php";
 display_html_head("Algebraic Expressions");
+
 $degree = 2;  // the degree of an expression. Just change this degree and the whole program works based on the 
 $num_of_terms = 2 * $degree + 3;  // number of terms generated
 display_form($degree);
+
 $expr = generate_expression($degree);
 $expr_str = stringify_expression($expr);
 display_expression("The Generated Expression:", $expr_str);
+
 //simplify it here and store it in $expr_simplified_str
 // I set $expr_simplified_str="" because you must complete the code and set $expr_simplified_str to the simplified string.
 $expr_simplified_str ="";
 display_expression("Its Simplified Version:",  $expr_simplified_str);
 display_html_foot();
 
-function display_form($default_degree){
-// you must complete this function
-// use HEREdoc to display the <label> and <input> and <form>
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+
+function display_form($degree){    
+    echo <<<FORM_FRAGMENT
+        <p>Select the degree of the expression:</p>        
+        <form action="" method="" style="width:100%">
+        <input value="$degree" /> <input type="submit" value="Generate" />
+        </form>
+    FORM_FRAGMENT;
 }
+
+class Term {
+    private $coefficient;
+    private $exponent;
+
+    public function __constrcutor($coefficient, $exponent) {
+        $this->coefficient = $coefficient;
+        $this->exponent = $exponent;
+    }
+
+    public function get_coefficients() {
+        return $this->coefficient;
+    }
+
+    public function get_expoent() {
+        return $this->coefficient;
+    }
+}
+
 
 function display_expression($caption, $expr_str)
 {
